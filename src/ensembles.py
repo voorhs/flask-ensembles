@@ -1,6 +1,8 @@
 import numpy as np
 from scipy.optimize import minimize_scalar
 from sklearn.tree import DecisionTreeRegressor
+from math import e
+bagging_const = 1 - 1 / e
 
 
 class RandomForestMSE:
@@ -41,7 +43,9 @@ class RandomForestMSE:
         """
         if self.feature_subsample_size is None:
             self.feature_subsample_size = 1 / 3
-        self.subspace_size = int(np.ceil(X.shape[1] * self.feature_subsample_size))
+        self.subspace_size = int(
+            np.ceil(X.shape[1] * self.feature_subsample_size))
+        subsample_size = int(np.ceil(X.shape[0] * bagging_const))
 
         self.subspaces = np.empty(
             (len(self.forest), self.subspace_size), dtype='int')
@@ -51,7 +55,11 @@ class RandomForestMSE:
                                            size=self.subspace_size,
                                            replace=False,
                                            shuffle=False)
-            self.forest[i].fit(X[:, self.subspaces[i]], y)
+            subsample = rng.choice(X.shape[0],
+                                   size=subsample_size,
+                                   replace=True,
+                                   shuffle=False).reshape(-1, 1)
+            self.forest[i].fit(X[subsample, self.subspaces[i]], y[subsample])
 
     def predict(self, X):
         """
@@ -106,7 +114,8 @@ class GradientBoostingMSE:
         """
         if self.feature_subsample_size is None:
             self.feature_subsample_size = 1 / 3
-        self.subspace_size = int(np.ceil(X.shape[1] * self.feature_subsample_size))
+        self.subspace_size = int(
+            np.ceil(X.shape[1] * self.feature_subsample_size))
 
         # initializing
         self.subspaces = np.empty(
@@ -132,7 +141,7 @@ class GradientBoostingMSE:
             ).x
             self.weights.append(w)
             predictions += self.lr * self.weights[i] * predicted
-            
+
             shift = y - predictions
 
         return self
