@@ -135,6 +135,8 @@ class GradientBoostingMSE:
             self.forest[i].fit(X[:, self.subspaces[i]], shift)
 
             # find weight
+            # task's loss function is supposed to be here
+            # but we handle only MSE
             predicted = self.forest[i].predict(X[:, self.subspaces[i]])
             w = minimize_scalar(
                 lambda x: np.sum((x * predicted - shift) ** 2)
