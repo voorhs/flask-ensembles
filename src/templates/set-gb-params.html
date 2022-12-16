@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}
+Ensembles
+{% endblock %}
+{% block pageheader %}
+Set Gradient Boosting parameters
+{% endblock %}
+{% block content %}
+<form action="#" method="post" class="form" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+    <div class="input-group my-3">
+        {{ form.n_estimators.label(class_="input-group-text") }}
+        {{ form.n_estimators(class_="form-control", style="height: auto;", value="200") }}
+    </div>
+    <div class="input-group my-3">
+        {{ form.max_depth.label(class_="input-group-text") }}
+        {{ form.max_depth(class_="form-control", style="height: auto;", value="50") }}
+    </div>
+    <div class="input-group my-3">
+        {{ form.subspace_size.label(class_="input-group-text") }}
+        {{ form.subspace_size(class_="form-control", style="height: auto;", value="0.8") }}
+    </div>
+    <div class="input-group my-3">
+        {{ form.learning_rate.label(class_="input-group-text") }}
+        {{ form.learning_rate(class_="form-control", style="height: auto;", value="0.05") }}
+    </div>
+    <button class="btn btn-outline-primary">Fit!</button>
+    {% if form.errors %}
+    <ul class="errors">
+        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+        {% for error in field_errors %}
+        <li>{{ form[field_name].label }}: {{ error }}</li>
+        {% endfor %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+</form>
+{% endblock %}

@@ -93,6 +93,46 @@ def set_rf_params():
 
     return render_template("set-rf-params.html", form=form)
 
+@app.route("/set-gb-params", methods=['GET', 'POST'])
+def set_gb_params():
+    form = SetGBParams()
+
+    if request.method == 'POST' and form.validate_on_submit():
+        global model, conv, params
+
+        # read parameters
+        params = {
+            'n_estimators': form.n_estimators.data,
+            'max_depth': form.max_depth.data,
+            'subspace_size': form.subspace_size.data,
+            'learning_rate': form.learning_rate.data
+        }
+
+        # fit model
+        model = GradientBoostingMSE(**params)
+        conv = model.fit(X_train, y_train, X_val, y_val)
+
+        # make and save plot
+        fig, ax = plt.subplots(1, figsize=(4,5))
+
+        ax.yaxis.set_major_formatter(
+            FuncFormatter(lambda x, pos: '{:.0f}'.format(x/1000)))
+
+        ax.plot(conv['train'], label='train', linewidth=3, alpha=0.75)
+        if X_val is not None and y_val is not None:
+            ax.plot(conv['val'], label='val', linewidth=3, alpha=0.75)
+        ax.legend()
+
+        ax.set_xlabel('# iterarions')
+        ax.set_ylabel(r'RMSE, $10^3$')
+
+        plt.savefig('src/static/plot.svg', bbox_inches='tight')
+
+        return redirect(url_for("learning_results"))
+
+    return render_template("set-gb-params.html", form=form)
+
+
 @app.route("/learning-results", methods=['GET', 'POST'])
 def learning_results():
     return render_template('learning-results.html', params=params)
