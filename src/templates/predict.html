@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+Prediction
+{% endblock %}
+{% block pageheader %}
+Upload Dataset for Prediction
+{% endblock %}
+{% block content %}
+<form action="#" method="post" class="form" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+    <div class="input-group my-3">
+        <!-- {{ form.X.label(class_="input-group-text") }} -->
+        <label for="X" class="input-group-text">sample</label>
+        {{ form.X(class_="form-control form-control-file", style="height: auto;") }}
+    </div>
+    <button class="btn btn-outline-primary">Submit</button>
+    {% if non_numeric %}
+        <div class="alert alert-danger my-3">Datasets must contain numeric values</div>
+    {% endif %}
+    {% if form.errors %}        
+        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+        {% for error in field_errors %}
+        <div class="alert alert-danger my-3">{{ form[field_name].label }}: {{ error }}</div>
+        {% endfor %}
+        {% endfor %}
+    {% endif %}
+</form>
+{% endblock %}

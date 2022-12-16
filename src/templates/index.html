@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}
+Ensembles
+{% endblock %}
+{% block pageheader %}
+Upload Dataset
+{% endblock %}
+{% block content %}
+<form action="#" method="post" class="form" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+    <div class="input-group my-3">
+        {{ form.train.label(class_="input-group-text") }}
+        {{ form.train(class_="form-control form-control-file", style="height: auto;") }}
+    </div>
+    <div class="input-group my-3">
+        {{ form.val.label(class_="input-group-text") }}
+        {{ form.val(class_="form-control form-control-file", style="height: auto;") }}
+    </div>
+    <div class="input-group my-3">
+        {{ form.target_col.label(class_="input-group-text") }}
+        {{ form.target_col(class_="form-control", style="height: auto;") }}
+    </div>
+    <button class="btn btn-outline-primary">Submit</button>
+    {% if non_numeric %}
+        <div class="alert alert-danger my-3">Datasets must contain numeric values</div>
+    {% endif %}
+    {% if form.errors %}        
+        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+        {% for error in field_errors %}
+        <div class="alert alert-danger my-3">{{ form[field_name].label }}: {{ error }}</div>
+        {% endfor %}
+        {% endfor %}
+    {% endif %}
+</form>
+{% endblock %}

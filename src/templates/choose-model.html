@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}
+Choose Model
+{% endblock %}
+{% block pageheader %}
+Choose model
+{% endblock %}
+{% block content %}
+<div class="card ml-auto mr-1" style="width: 300px">
+    <div class="card-header text-center">Random Forest</div>
+    <img class="card-img-top" src="https://i.imgflip.com/65b8d8.png"></img>
+    <div class="card-body">
+        <a href="/set-rf-params" class="stretched-link"></a>
+    </div>
+    
+</div>
+<div class="card mr-auto ml-1" style="width: 300px">
+    <div class="card-header text-center">Gradient Boosting</div>
+    <img class="card-img-top" src="https://s2.coinmarketcap.com/static/img/coins/200x200/14447.png"></img>
+    <div class="card-body">
+        <a href="/set-gb-params" class="stretched-link"></a>
+    </div>
+    
+</div>
+{% endblock %}
