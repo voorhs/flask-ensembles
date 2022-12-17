@@ -16,11 +16,11 @@ Python-flask based web-application which provides fitting and predicting regress
 
 You need to upload `.csv` file with dataset for training. Since my app doesn't perform data preprocessing, your dataset must contain only numerical values. Additionaly, you can upload validation dataset. You must provide name of target column.
 
-[!page1](src/app-demo/p1.jpg)
+![page1](src/app-demo/p1.jpg)
 
 ### Choose model
 
-[!page2](src/app-demo/p2.jpg)
+![page2](src/app-demo/p2.jpg)
 
 ### Set parameters
 
@@ -32,7 +32,7 @@ You can specify parameters for model chosen. Random Forest model must be provide
 
 In addition, Gradient Boosting requires `learning_rate`, positive float.
 
-[!page3](src/app-demo/p3.jpg)
+![page3](src/app-demo/p3.jpg)
 
 After clicking `Fit!` button you need to wait until your model is trained. It may take long time.
 
@@ -40,7 +40,7 @@ After clicking `Fit!` button you need to wait until your model is trained. It ma
 
 After completing model training, learning curve for train dataset is shown (and for validation dataset, if provided). RMSE is used. 
 
-[!page4](src/app-demo/p4.jpg)
+![page4](src/app-demo/p4.jpg)
 
 If you want to make predictions with trained model, click on `Predict?` button.
 
@@ -48,7 +48,7 @@ If you want to make predictions with trained model, click on `Predict?` button.
 
 You need to upload `.csv` file with dataset for prediction. It must have all columns named as in training datasets and not contain target column.
 
-[!page5](src/app-demo/p5.jpg)
+![page5](src/app-demo/p5.jpg)
 
 After clicking `Predict` button you need to wait until predictions are made. It may take long time.
 
@@ -56,4 +56,4 @@ After clicking `Predict` button you need to wait until predictions are made. It 
 
 After making prediction, it is shown in scrollable table. You can download it as `.csv` file.
 
-[!page6](src/app-demo/p6.jpg)
+![page6](src/app-demo/p6.jpg)
