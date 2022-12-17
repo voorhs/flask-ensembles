@@ -16,11 +16,11 @@ Python-flask based web-application which provides fitting and predicting regress
 
 You need to upload `.csv` file with dataset for training. Since my app doesn't perform data preprocessing, your dataset must contain only numerical values. Additionaly, you can upload validation dataset. You must provide name of target column.
 
-![page1](src/app-demo/p1.jpg)
+![p1](https://github.com/voorhs/flask-ensembles/blob/dev/src/app-demo/p1.jpg?raw=true)
 
 ### Choose model
 
-![page2](src/app-demo/p2.jpg)
+![p2](https://github.com/voorhs/flask-ensembles/blob/dev/src/app-demo/p2.jpg?raw=true)
 
 ### Set parameters
 
