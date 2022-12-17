@@ -6,6 +6,7 @@ Python-flask based web-application which provides fitting and predicting regress
 
 - `numpy`
 - `scipy`
+- `sklearn`
 - `flask`
 - `flask_wtf`
 - `wtforms`
