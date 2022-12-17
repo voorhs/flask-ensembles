@@ -22,7 +22,7 @@ Upload Dataset
     </div>
     <button class="btn btn-outline-primary">Submit</button>
     {% if non_numeric %}
-        <div class="alert alert-danger my-3">Datasets must contain numeric values</div>
+        <div class="alert alert-danger my-3">Datasets must contain only numeric values</div>
     {% endif %}
     {% if form.errors %}        
         {% for field_name, field_errors in form.errors|dictsort if field_errors %}
