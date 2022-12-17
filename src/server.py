@@ -1,5 +1,5 @@
 # web
-from flask import Flask, render_template, request, redirect, url_for, send_file
+from flask import Flask, render_template, request, redirect, url_for
 from my_wtforms import *
 
 # ml
